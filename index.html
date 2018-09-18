@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UrbanMAF</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/media.css">
+    <link rel="stylesheet" href="libs/animate/animate.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="libs/one-page-scroll/onepage-scroll.css">
+</head>
+
+<body>
+
+    <div class="nav">
+        <div class="container">
+            <div class="logo"></div>
+            <input id="menu" type="checkbox">
+            <label for="menu" class='cmn-toggle-switch cmn-toggle-switch__htx'>
+                <span>toggle menu</span>
+            </label>
+            <div class="wrap-menu">
+                <ul class='menu'>
+                    <li onclick="$('.main').moveTo(2);">
+                        <span clone='Каталог'>
+                            Каталог
+                        </span>
+                    </li>
+                    <li onclick="$('.main').moveTo(3);">
+                        <span clone='Производство'>
+                            Производство
+                        </span>
+                    </li>
+                    <li onclick="$('.main').moveTo(4);">
+                        <span clone='Продукция'>
+                            Продукция
+                        </span>
+                    </li>
+                    <li onclick="$('.main').moveTo(5);">
+                        <span clone='Проекты'>
+                            Проекты
+                        </span>
+                    </li>
+                    <li onclick="$('.main').moveTo(6);">
+                        <span clone='События'>
+                            События
+                        </span>
+                    </li>
+                    <li onclick="$('.main').moveTo(7);">
+                        <span clone='Контакты'>
+                            Контакты
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="buttons">
+                <span></span>
+                <span>EN</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        <section id="header">
+
+            <div class="out-slider">
+                <div class="in-slider">
+                    <div class="slide" style="background-image: url(image/backgrounds/bg_1.jpg);"></div>
+                    <div class="slide" style="background-image: url(image/backgrounds/bg_2.jpg);"></div>
+                    <div class="slide" style="background-image: url(image/backgrounds/bg_3.jpg);"></div>
+                    <div class="slide" style="background-image: url(image/backgrounds/bg_4.jpg);"></div>
+                    <div class="slide" style="background-image: url(image/backgrounds/bg_5.jpg);"></div>
+                    <div class="slide" style="background-image: url(image/backgrounds/bg_6.jpg);"></div>
+                    <div class="slide" style="background-image: url(image/backgrounds/bg_7.jpg);"></div>
+                    <div class="slide" style="background-image: url(image/backgrounds/bg_8.jpg);"></div>
+                    <div class="slide" style="background-image: url(image/backgrounds/bg_9.jpg);"></div>
+                    <div class="slide" style="background-image: url(image/backgrounds/bg_10.jpg);"></div>
+                </div>
+            </div>
+
+        </section>
+
+        <section>1</section>
+        <section>2</section>
+        <section>3</section>
+        <section>4</section>
+        <section>5</section>
+        <section>6</section>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="libs/one-page-scroll/jquery.onepage-scroll.min.js"></script>
+
+    <script>
+        $(".main").onepage_scroll({
+            sectionContainer: "section",
+            easing: "ease",
+            animationTime: 1000,
+            pagination: true,
+            updateURL: false,
+            beforeMove: function(index) {},
+            afterMove: function(index) {},
+            loop: false,
+            keyboard: true,
+            responsiveFallback: false,
+            direction: "vertical"
+        });
+
+    </script>
+
+    <script>
+        //slider
+        let w;
+        let currentPosition = 1;
+        let count = $('.in-slider .slide').length + 1;
+
+        let resizeInSlider = () => {
+            w = $('body').width();
+            $('.in-slider').width(w * count);
+            $('.slide').width(w);
+            $(".in-slider").css('margin-left', -(w * currentPosition) + 'px');
+            console.log('w', w);
+            console.log('cp', currentPosition);
+        };
+
+        let nextSlide = () => {
+            if (currentPosition == count - 1)
+                currentPosition = 0;
+
+
+            $(".in-slider").animate({
+                marginLeft: -(w * currentPosition) + 'px',
+            }, 1000, function() {
+            });
+
+            currentPosition++;
+        };
+
+        setInterval(() => {
+            nextSlide();
+        }, 7000);
+
+        $(window).resize(function() {
+            console.log('hi');
+            resizeInSlider();
+        });
+        resizeInSlider();
+
+    </script>
+</body>
+
+</html>
